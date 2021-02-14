@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Day from './Day'
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 
 
@@ -27,7 +27,9 @@ const Calender = (props) => {
 
     return (
         <div className="days">
-            {generateDays}
+            <DragDropContext>
+                {generateDays}
+            </DragDropContext>
         </div>
     )
 }

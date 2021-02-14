@@ -15,16 +15,30 @@ import Workouts from './components/Workouts';
 import  GoogleLogin  from 'react-google-login';
 import  GoogleLogout  from 'react-google-login';
 import axios from 'axios';
-import Calender from './components/Calender'
+import Calendar from './components/Calendar'
 import Users from './components/Users'
 import Plan from './components/Plan'
 
 const BASE_URL = 'http://localhost:5000';
 function App () {
   const [user, setUser] = useState(null)
+  const [workoutCount, setWorkoutCount] = useState([0])
+  const [seshCount, setSeshCount] = useState([0])
+  const [antCount, setAntCount] = useState([0])
+
+  const addToWorkoutCount = () => {
+     // when a workout is checked off, increase workout count.
+  }
+
+  const addToSeshCount = () => {
+
+  }
+
+  const addToAntCount = () => {
+
+  }
   
   
-  // const clientId = config.GOOGLE_CLIENT_ID
  
     const onSuccess = (res) => {
       console.log('[Login Success] currentUser:', res.profileObj);
@@ -115,6 +129,32 @@ function App () {
     
     const content = user ? <NewUserForm url={BASE_URL} user={user} /> : <Plan />
     const content2 = user ? <Plan user={user} url={BASE_URL}/> : <Plan />
+
+  const nav = user ? 
+  <nav className="nav">
+    <ul>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      <li>
+        <Link to="/dashboard">Dashboard</Link>
+      </li>
+      <li>
+        <Link to="/plan">Plan</Link>
+      </li>
+      <li>
+        <Link to="/new-user-form">Set your Level</Link>
+      </li>
+      <li>
+        <Link to="/Calender">Schedule</Link>
+      </li>
+      <li>
+        <Link to="/users">users</Link>
+      </li>
+    </ul>
+  </nav> : <p>Please log in to create an account and start climbing</p>
+
+
     return (
     <Router>
       <div className="App">
@@ -123,28 +163,7 @@ function App () {
           <h3>An app for climbers who want to up their sends</h3>
           <h4>{message}</h4>
           {user ? logoutButton : loginButton}
-          <nav className="nav">
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/dashboard">Dashboard</Link>
-              </li>
-              <li>
-                <Link to="/plan">Plan</Link>
-              </li>
-              <li>
-                <Link to="/new-user-form">Set your Level</Link>
-              </li>
-              <li>
-                <Link to="/Calender">Schedule</Link>
-              </li>
-              <li>
-                <Link to="/users">users</Link>
-              </li>
-            </ul>
-          </nav>
+          {nav}
         </header>
         <body>
           <Switch>
@@ -154,7 +173,7 @@ function App () {
               {content2}
             </Route>
             <Route path='/calender'>
-              <Calender />
+              <Calendar />
             </Route>
             <Route path='/workouts'>
               <Workouts url={BASE_URL}/>
