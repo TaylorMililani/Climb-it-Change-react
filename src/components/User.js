@@ -6,9 +6,10 @@ const User = (props) => {
     return (
         <div>
             <h2>{props.name}</h2>
-            <p>{props.level}</p>
+            <p>level: {props.level}</p>
             <p>{props.email}</p>
             <p>{props.member_since}</p>
+            <p>{props.plan}</p>
         </div>
     )
 }
@@ -18,7 +19,8 @@ User.propTypes = {
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     level: PropTypes.string.isRequired,
-    member_since: PropTypes.string.isRequired
+    member_since: PropTypes.string.isRequired,
+    plan: PropTypes.object.isRequired
 }
 
 export default User;
