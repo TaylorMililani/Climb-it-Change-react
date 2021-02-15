@@ -18,6 +18,10 @@ import axios from 'axios';
 import Calendar from './components/Calendar'
 import Users from './components/Users'
 import Plan from './components/Plan'
+import Dashboard from './components/Dashboard'
+import Homepage from './components/Homepage'
+import { DragDropContext } from 'react-beautiful-dnd';
+
 let BASE_URL = ''
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'production') {
   BASE_URL = 'http://localhost:5000';
@@ -132,7 +136,6 @@ function App () {
     isSignedIn={false}
     />
     
-    const content = user ? <NewUserForm url={BASE_URL} user={user} /> : <Plan />
     const content2 = user ? <Plan user={user} url={BASE_URL}/> : <Plan />
 
   const nav = user ? 
@@ -172,13 +175,16 @@ function App () {
         </header>
         <body>
           <Switch>
-            <Route path='/login'>
+            <Route path='/'>
+              <Homepage />
             </Route>
             <Route path="/plan">
               {content2}
             </Route>
             <Route path='/calendar'>
-              <Calendar />
+              <DragDropContext>
+                <Calendar />
+              </DragDropContext>
             </Route>
             <Route path='/workouts'>
               <Workouts url={BASE_URL}/>
@@ -186,8 +192,11 @@ function App () {
             <Route path='/new-user-form'>
               <NewUserForm url={BASE_URL} user={user} />
             </Route>
-            <Route>
+            <Route path='/users'>
               <Users url={BASE_URL} />
+            </Route>
+            <Route path='/dashboard'>
+              <Dashboard url={BASE_URL} user={user}/>
             </Route>
           </Switch>
         </body>

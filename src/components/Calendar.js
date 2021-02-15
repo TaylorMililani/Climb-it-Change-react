@@ -29,10 +29,11 @@ const dragReducer = produce((draft, action) => {
         {name:"Climbing Sesh #2", id: 4, category: "not_set"},
         {name:"Antagonist #1", id: 5, category: "not_set"},
         {name:"Antagonist #2", id: 6, category: "not_set"},
-        {name:"Free Climb!", id: 7}
+        {name:"Free Climb!", id: 7, category: "not_set"}
     ]
 
     const days = [
+        {name: "Todo", id: 'todo', tasks: []},
         {name: "Sunday", id: 'sunday', tasks: []},
         {name: "Monday", id: 'monday', tasks: []},
         {name: "Tuesday", id: 'tuesday', tasks: []},
