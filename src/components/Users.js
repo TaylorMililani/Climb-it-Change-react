@@ -5,7 +5,7 @@ import User from './User'
 
 const Users = (props) => {
     const [users, setUsers] = useState([]);
-    const [errorMessage, setErrorMessage] = ('')
+    const [errorMessage, setErrorMessage] = useState('')
 
     useEffect(() => {
         axios.get(`${props.url}/api/users`)
