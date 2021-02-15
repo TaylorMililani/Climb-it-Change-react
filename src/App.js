@@ -18,8 +18,13 @@ import axios from 'axios';
 import Calendar from './components/Calendar'
 import Users from './components/Users'
 import Plan from './components/Plan'
-
-const BASE_URL = 'http://localhost:5000';
+let BASE_URL = ''
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'production') {
+  BASE_URL = 'http://localhost:5000';
+} else {
+  BASE_URL = 'https://climb-it-change.herokuapp.com/';
+  console.log(BASE_URL)
+}
 function App () {
   const [user, setUser] = useState(null)
   const [workoutCount, setWorkoutCount] = useState([0])
@@ -146,7 +151,7 @@ function App () {
         <Link to="/new-user-form">Set your Level</Link>
       </li>
       <li>
-        <Link to="/Calender">Schedule</Link>
+        <Link to="/Calendar">Schedule</Link>
       </li>
       <li>
         <Link to="/users">users</Link>
@@ -172,14 +177,14 @@ function App () {
             <Route path="/plan">
               {content2}
             </Route>
-            <Route path='/calender'>
+            <Route path='/calendar'>
               <Calendar />
             </Route>
             <Route path='/workouts'>
               <Workouts url={BASE_URL}/>
             </Route>
             <Route path='/new-user-form'>
-              {content}
+              <NewUserForm url={BASE_URL} user={user} />
             </Route>
             <Route>
               <Users url={BASE_URL} />
