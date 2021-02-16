@@ -31,21 +31,21 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'production') {
 }
 function App () {
   const [user, setUser] = useState(null)
-  const [workoutCount, setWorkoutCount] = useState([0])
-  const [seshCount, setSeshCount] = useState([0])
-  const [antCount, setAntCount] = useState([0])
+  // const [workoutCount, setWorkoutCount] = useState([0])
+  // const [seshCount, setSeshCount] = useState([0])
+  // const [antCount, setAntCount] = useState([0])
 
-  const addToWorkoutCount = () => {
-     // when a workout is checked off, increase workout count.
-  }
+  // const addToWorkoutCount = () => {
+  //    // when a workout is checked off, increase workout count.
+  // }
 
-  const addToSeshCount = () => {
+  // const addToSeshCount = () => {
 
-  }
+  // }
 
-  const addToAntCount = () => {
+  // const addToAntCount = () => {
 
-  }
+  // }
   
   
  
@@ -141,9 +141,9 @@ function App () {
   const nav = user ? 
   <nav className="nav">
     <ul>
-      <li>
+      {/* <li>
         <Link to="/">Home</Link>
-      </li>
+      </li> */}
       <li>
         <Link to="/dashboard">Dashboard</Link>
       </li>
@@ -175,16 +175,14 @@ function App () {
         </header>
         <body>
           <Switch>
-            <Route path='/'>
+            {/* <Route path='/'>
               <Homepage />
-            </Route>
+            </Route> */}
             <Route path="/plan">
               {content2}
             </Route>
             <Route path='/calendar'>
-              <DragDropContext>
-                <Calendar />
-              </DragDropContext>
+                <Calendar user={user}/>
             </Route>
             <Route path='/workouts'>
               <Workouts url={BASE_URL}/>

@@ -7,9 +7,7 @@ import { DragDropContext } from 'react-beautiful-dnd';
 
 ReactDOM.render(
   <React.StrictMode>
-    <DragDropContext>
-      <App />
-    </DragDropContext>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
