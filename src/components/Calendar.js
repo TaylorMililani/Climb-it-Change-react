@@ -251,19 +251,6 @@ const Calendar = (props) => {
     // multiple onClick events
     // reset button
 
-  
-    const addToWorkoutCount = () => {
-       // when a workout is checked off, increase workout count.
-    }
-  
-    const addToSeshCount = () => {
-  
-    }
-  
-    const addToAntCount = () => {
-  
-    }
-
 
 
 

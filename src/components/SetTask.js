@@ -5,9 +5,8 @@ const SetTask = (props) => {
 
     return (
         <div className="task-card">
-            <p className="card__content">{props.name}</p>
+            {props.name}
             {props.complete ? <p>Completed!</p> : <button className="complete" onClick={(event) => props.markComplete(event, props.id)}>Mark Complete</button>}
-            
         </div>
     )
 }

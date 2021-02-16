@@ -120,9 +120,9 @@ function App () {
   const nav = user ? 
   <nav className="nav">
     <ul>
-      {/* <li>
-        <Link to="/">Home</Link>
-      </li> */}
+      <li>
+        <Link to="/home">Home</Link>
+      </li>
       <li>
         <Link to="/dashboard">Dashboard</Link>
       </li>
@@ -153,9 +153,9 @@ function App () {
         </header>
         <body>
           <Switch>
-            {/* <Route path='/'>
+            <Route path='/home'>
               <Homepage />
-            </Route> */}
+            </Route>
             <Route path="/plan">
               <Plan user={user} url={BASE_URL}/>
             </Route>

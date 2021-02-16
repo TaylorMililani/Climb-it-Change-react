@@ -6,7 +6,7 @@ const Task = (props) => {
     return (
         <div>
             <button className="task-card" onClick={(event) => props.onClickTask(event, props.id)}>
-                <p className="card__content">{props.name}</p>
+                {props.name}
             </button>
         </div>
     )

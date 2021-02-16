@@ -1,5 +1,25 @@
+.task-card {
+    background-color: #F4FF81;
+    /* text-align: center; */
+    padding: 1em 0;
+    margin: 0.5rem;
+  
+    height: 75px;
+    width: 125px;
+    flex-basis: 18%;
+    flex-direction: column;
+    border-radius: 5px;
+  
+    display: grid;
+    
+    align-items: center;
+    
+}
+
 .card__content {
     grid-column-start: 2;
+    height: 125px;
+    width: 125px;
   
     display: flex;
     flex-direction: column;
@@ -9,3 +29,7 @@
     font-weight: 100;
     overflow: hidden;
   }
+
+.complete {
+
+}
