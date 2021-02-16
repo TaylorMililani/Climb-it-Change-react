@@ -28,27 +28,38 @@ const Calendar = (props) => {
   
     // }
 
-    const markComplete = (event) => {
-        if (task.id === 'workout') {
-            let count = workoutCount
-            setWorkoutCount(count += 1)
-        } else if (task.id === 'sesh') {
-            let count = seshCount
-            setSeshCount(count += 1)
-        } else {
-            let count = antCount
-            setAntCount(count += 1)
-        }
+    const onClickTask = () => {
+
     }
 
+    const onClickDay = () => {
+
+    }
+
+    // const markComplete = (event) => {
+    //     if (task.id === 'workout') {
+    //         let count = workoutCount
+    //         setWorkoutCount(count += 1)
+    //         task.complete = true
+    //     } else if (task.id === 'sesh') {
+    //         let count = seshCount
+    //         setSeshCount(count += 1)
+    //         task.complete = true
+    //     } else {
+    //         let count = antCount
+    //         setAntCount(count += 1)
+    //         task.complete = true
+    //     }
+    // }
+
     const [todo, setTodo] = useState([
-        {name:"Workout #1", id: 'workout', category: "not_set"},
-        {name:"Workout #2", id: 'workout', category: "not_set"},
-        {name:"Climbing Sesh #1", id: 'sesh', category: "not_set"},
-        {name:"Climbing Sesh #2", id: 'sesh', category: "not_set"},
-        {name:"Antagonist #1", id: 'ant', category: "not_set"},
-        {name:"Antagonist #2", id: 'ant', category: "not_set"},
-        {name:"Free Climb!", id: 'sesh', category: "not_set"}
+        {name:"Workout #1", id: 'workout', category: "not_set", complete: false},
+        {name:"Workout #2", id: 'workout', category: "not_set", complete: false},
+        {name:"Climbing Sesh #1", id: 'sesh', category: "not_set", complete: false},
+        {name:"Climbing Sesh #2", id: 'sesh', category: "not_set", complete: false},
+        {name:"Antagonist #1", id: 'ant', category: "not_set", complete: false},
+        {name:"Antagonist #2", id: 'ant', category: "not_set", complete: false},
+        {name:"Free Climb!", id: 'sesh', category: "not_set", complete: false}
     ])
     const [sun, setSun] = useState([])
     const [mon, setMon] = useState([])
@@ -83,7 +94,7 @@ const Calendar = (props) => {
             name={task.name}
             id={task.id}
             key={index}
-            markComplete={markComplete}
+            // markComplete={markComplete}
         />
     })
    
