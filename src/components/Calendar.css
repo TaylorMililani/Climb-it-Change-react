@@ -1,12 +1,20 @@
 .calender {
-  text-align: center;
-  display: inline-block;
+  /* text-align: center; */
+  /* display: inline-block; */
   /* grid-template-columns: 12%, 12%, 12%, 12%, 12%, 12%, 12%, 12%; */
 }
 
 .column {
   display: flex;
   flex-direction: row;
+  padding: 1em 0;
+  margin: 0.5rem;
+
+  height: 125px;
+  width: 125px;
+  /* flex-basis: 18%; */
+
+  border-radius: 5px;
 }
 /* .calender div {
   display: inline-grid;

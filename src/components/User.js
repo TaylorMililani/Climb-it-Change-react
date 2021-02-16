@@ -9,7 +9,7 @@ const User = (props) => {
             <p>level: {props.level}</p>
             <p>{props.email}</p>
             <p>{props.member_since}</p>
-            <p>{props.plan}</p>
+            <p>{props.workout_count}</p>
         </div>
     )
 }

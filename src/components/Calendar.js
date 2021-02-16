@@ -3,6 +3,7 @@ import Day from './Day'
 import Task from './Task'
 import './Calendar.css';
 import CalendarContent from './CalendarContent'
+import axios from 'axios';
 
 const Calendar = (props) => {
     const tasks = [
@@ -24,10 +25,7 @@ const Calendar = (props) => {
         {name: "Friday", id: 'friday', tasks: []},
         {name: "Saturday", id: 'saturday', tasks: []}
     ]
-
-    const [workoutCount, setWorkoutCount] = useState(props.user.workout_count)
-    const [seshCount, setSeshCount] = useState(props.user.sesh_count)
-    const [antCount, setAntCount] = useState(props.user.ant_count)
+    
     const [currentDay, setCurrentDay] = useState(null)
     const [currentTask, setCurrentTask] = useState(null)
     const [todo, setTodo] = useState(tasks)
@@ -42,7 +40,7 @@ const Calendar = (props) => {
     const onClickTask = (event, id) => {
         event.preventDefault();
         const task = tasks.find((task) => id === task.id)
-        console.log({id})
+        // console.log({id})
         
         setCurrentTask(task)
     }
@@ -58,13 +56,13 @@ const Calendar = (props) => {
     useEffect(() => {
         if (currentTask && currentDay) {
             const index = todo.findIndex((task) => task.id === currentTask.id);
-            console.log({index})
+            // console.log({index})
             const newTodo = todo.slice();
             if (index > -1) {
                 newTodo.splice(index, 1);
             }
             setTodo(newTodo)
-            console.log(todo)
+            // console.log(todo)
             if (currentDay.id === 'sunday') {
                 const newSun = sun.slice()
                 newSun.push(currentTask)
@@ -114,7 +112,6 @@ const Calendar = (props) => {
                 category={task.category}
                 complete={task.complete}
                 onClickTask={onClickTask}
-                // markComplete={markComplete}
             />
         })
     }
@@ -131,7 +128,6 @@ const Calendar = (props) => {
                 category={task.category}
                 complete={task.complete}
                 onClickTask={onClickTask}
-                // markComplete={markComplete}
             />
         })
     }
@@ -147,7 +143,6 @@ const Calendar = (props) => {
                 category={task.category}
                 complete={task.complete}
                 onClickTask={onClickTask}
-                // markComplete={markComplete}
             />
         })
     }
@@ -163,7 +158,6 @@ const Calendar = (props) => {
                 category={task.category}
                 complete={task.complete}
                 onClickTask={onClickTask}
-                // markComplete={markComplete}
             />
         })
     }
@@ -179,7 +173,6 @@ const Calendar = (props) => {
                 category={task.category}
                 complete={task.complete}
                 onClickTask={onClickTask}
-                // markComplete={markComplete}
             />
         })
     }
@@ -195,7 +188,6 @@ const Calendar = (props) => {
                 category={task.category}
                 complete={task.complete}
                 onClickTask={onClickTask}
-                // markComplete={markComplete}
             />
         })
     }
@@ -211,7 +203,6 @@ const Calendar = (props) => {
                 category={task.category}
                 complete={task.complete}
                 onClickTask={onClickTask}
-                // markComplete={markComplete}
             />
         })
     }
@@ -227,30 +218,29 @@ const Calendar = (props) => {
                 category={task.category}
                 complete={task.complete}
                 onClickTask={onClickTask}
-                // markComplete={markComplete}
             />
         })
     }
 
-    // const onSubmit = () => {
-        
-    // }
+    const onSubmit = (event) => {
+        event.preventDefault();
+        const data = {
+            email: props.user.email,
+            schedule: [sun, mon, tues, wed, thurs, fri, sat]
+        }
+        axios.post(`${props.url}/set-schedule`, {data: data})
+        .then(res => {
+            console.log(res)
+        })
+        .catch(error => {
+            console.log(error.message)
+        })
+    }
+    // join table
+    // save as string - turn into array - access data -janky option
+    // json aggregate table
+    // list of strings
 
-    // const markComplete = (event) => {
-    //     if (task.id === 'workout') {
-    //         let count = workoutCount
-    //         setWorkoutCount(count += 1)
-    //         task.complete = true
-    //     } else if (task.id === 'sesh') {
-    //         let count = seshCount
-    //         setSeshCount(count += 1)
-    //         task.complete = true
-    //     } else {
-    //         let count = antCount
-    //         setAntCount(count += 1)
-    //         task.complete = true
-    //     }
-    // }
 
 
     // set up arrays for each day of the day of the week/todo from usestate
@@ -262,24 +252,24 @@ const Calendar = (props) => {
     // reset button
 
   
-    // const addToWorkoutCount = () => {
-    //    // when a workout is checked off, increase workout count.
-    // }
+    const addToWorkoutCount = () => {
+       // when a workout is checked off, increase workout count.
+    }
   
-    // const addToSeshCount = () => {
+    const addToSeshCount = () => {
   
-    // }
+    }
   
-    // const addToAntCount = () => {
+    const addToAntCount = () => {
   
-    // }
+    }
 
 
 
 
    
     return (
-        <div className="calender">
+        <form className="calender" onSubmit={onSubmit}>
             <div className="column">
                 <button id="todo" onClick={(event) => onClickDay(event, "todo")}>Todo</button>
                 {renderedTodos}
@@ -312,7 +302,8 @@ const Calendar = (props) => {
                 <button id="saturday" onClick={(event) => onClickDay(event, "saturday")}>Saturday</button>
                 {renderedSat}
             </div>
-        </div>
+            <button type="submit">Save Schedule</button>
+        </form>
     )
 }
 

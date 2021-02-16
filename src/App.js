@@ -10,8 +10,6 @@ import {
 import config from './config.json'
 import NewUserForm from './components/NewUserForm';
 import Workouts from './components/Workouts';
-// import Login from './components/Login';
-// import Logout from './components/Logout';
 import  GoogleLogin  from 'react-google-login';
 import  GoogleLogout  from 'react-google-login';
 import axios from 'axios';
@@ -20,13 +18,12 @@ import Users from './components/Users'
 import Plan from './components/Plan'
 import Dashboard from './components/Dashboard'
 import Homepage from './components/Homepage'
-import { DragDropContext } from 'react-beautiful-dnd';
 
 let BASE_URL = ''
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'production') {
   BASE_URL = 'http://localhost:5000';
 } else {
-  BASE_URL = 'https://climb-it-change.herokuapp.com/';
+  BASE_URL = 'https://climb-it-change.herokuapp.com';
   console.log(BASE_URL)
 }
 function App () {
@@ -49,22 +46,28 @@ function App () {
   
   
  
-    const onSuccess = (res) => {
-      console.log('[Login Success] currentUser:', res.profileObj);
-      const data = {
-        id_token: res.getAuthResponse().id_token,
-        name: res.profileObj.name,
-        email: res.profileObj.email
-        // imageUrl: res.profileObj.imageUrl
-      }
-      // setUser(data)
-      axios.post(`${BASE_URL}/login`, { data: data })
-      .then(r => {
-        setUser(data)
+  const onSuccess = (res) => {
+    console.log('[Login Success] currentUser:', res.profileObj);
+    const data = {
+      id_token: res.getAuthResponse().id_token,
+      name: res.profileObj.name,
+      email: res.profileObj.email
+    }
+    axios.post(`${BASE_URL}/login`, { data: data })
+    .then(r => {
+      console.log(r.data)
+      axios.post(`${BASE_URL}/api/user-data`, { data: data })
+      .then(res => {
+        console.log(res.data)
+        setUser(res.data)
       })
       .catch(error => {
-        console.log(error.data)
+        console.log(error)
       })
+    })
+    .catch(error => {
+      console.log(error.data)
+    })
     refreshTokenSetup(res);
   }
 
@@ -94,28 +97,6 @@ function App () {
     setTimeout(refreshToken, refreshTiming)
   }
 
-  // const setLevel = (event) => {
-  //   if (user) {
-  //     user.level = event.target.value
-  //     const data = {
-  //       level: user.level,
-  //       email: user.email
-  //     }
-  //     axios.patch(`${BASE_URL}/new-user-form`, { data: data })
-  //     .then(res => {
-  //       console.log(res.data)
-  //     })
-  //     .catch(error => {
-  //       console.log(error.data)
-  //     })
-  //   }
-  // }
-  // if (user && (user.level === '' || user.level === undefined)) {
-  //   console.log('not redirecting')
-  //   return <Redirect to = {{ pathname: "/new-user-form" }} />
-  // } else {
-  //   console.log('condition failed')
-  // }
   const message = user ? `${user.name}` : 'no one logged in'
   const loginButton = 
   <GoogleLogin
@@ -135,8 +116,6 @@ function App () {
     onFailure={onLogoutFailure}
     isSignedIn={false}
     />
-    
-    const content2 = user ? <Plan user={user} url={BASE_URL}/> : <Plan />
 
   const nav = user ? 
   <nav className="nav">
@@ -162,7 +141,6 @@ function App () {
     </ul>
   </nav> : <p>Please log in to create an account and start climbing</p>
 
-
     return (
     <Router>
       <div className="App">
@@ -179,10 +157,10 @@ function App () {
               <Homepage />
             </Route> */}
             <Route path="/plan">
-              {content2}
+              <Plan user={user} url={BASE_URL}/>
             </Route>
             <Route path='/calendar'>
-                <Calendar user={user}/>
+                <Calendar url={BASE_URL} user={user}/>
             </Route>
             <Route path='/workouts'>
               <Workouts url={BASE_URL}/>

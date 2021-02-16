@@ -20,12 +20,16 @@ const Users = (props) => {
 
     const userComponents = users.map((user) => {
         return (<User
+            key={user.id}
             id={user.id}
             name={user.name}
             email={user.email}
             level={user.level}
             member_since={user.member_since}
             plan={user.plan}
+            workout_count={user.workout_count}
+            sesh_count={user.sesh_count}
+            ant_count={user.ant_count}
         />)
     });
 
