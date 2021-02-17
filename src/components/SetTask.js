@@ -9,6 +9,7 @@ const SetTask = (props) => {
         setComplete(!complete)
         props.markComplete(event, props.id)
     }
+    
     return (
         <div className="task-card">
             <p>{props.name}</p>

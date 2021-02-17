@@ -17,7 +17,6 @@ const Dashboard = (props) => {
         {name:"Antagonist #2", id: 6, type: 'ant', category: "not_set", complete: false},
         {name:"Free Climb!", id: 7, type: 'sesh', category: "not_set", complete: false}
     ])
-    const [schedule, setSchedule] = useState(props.user.schedule)
     const updateTask = (id) => {
         const task = tasks.find((task) => id === task.id)
         const updatedTask = {name: task.name, id: task.id, type: task.type, category: task.category, complete: !task.complete}
@@ -117,7 +116,7 @@ const Dashboard = (props) => {
                 category={task.category}
                 complete={task.complete}
                 markComplete={markComplete}
-                user={props.user}
+                task={task}
             />
         })
     }
