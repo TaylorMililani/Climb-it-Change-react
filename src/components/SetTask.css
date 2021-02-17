@@ -10,13 +10,13 @@
     flex-direction: column;
     border-radius: 5px;
   
-    display: grid;
+    display: flex;
     
     align-items: center;
     
 }
 
-.card__content {
+/* .card__content {
     grid-column-start: 2;
     height: 125px;
     width: 125px;
@@ -28,7 +28,7 @@
     text-align: center;
     font-weight: 100;
     overflow: hidden;
-  }
+  } */
 
 .complete {
 

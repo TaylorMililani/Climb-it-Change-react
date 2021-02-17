@@ -1,12 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './SetTask.css'
 
 const SetTask = (props) => {
-
+    console.log(props.task.complete)
+    console.log(props.complete)
+    const [complete, setComplete] = useState(props.complete)
+    const toggleComplete = (event) => {
+        setComplete(!complete)
+        props.markComplete(event, props.id)
+    }
     return (
         <div className="task-card">
-            {props.name}
-            {props.complete ? <p>Completed!</p> : <button className="complete" onClick={(event) => props.markComplete(event, props.id)}>Mark Complete</button>}
+            <p>{props.name}</p>
+            {complete ? <p>Completed!</p> : <button className="complete" onClick={(event) => toggleComplete(event)}>Mark Complete</button>}
         </div>
     )
 }

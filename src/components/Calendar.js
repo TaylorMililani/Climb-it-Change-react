@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Day from './Day'
 import Task from './Task'
 import './Calendar.css';
-import CalendarContent from './CalendarContent'
 import axios from 'axios';
 
 const Calendar = (props) => {

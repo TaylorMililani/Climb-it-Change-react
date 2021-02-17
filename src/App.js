@@ -28,23 +28,6 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'production') {
 }
 function App () {
   const [user, setUser] = useState(null)
-  // const [workoutCount, setWorkoutCount] = useState([0])
-  // const [seshCount, setSeshCount] = useState([0])
-  // const [antCount, setAntCount] = useState([0])
-
-  // const addToWorkoutCount = () => {
-  //    // when a workout is checked off, increase workout count.
-  // }
-
-  // const addToSeshCount = () => {
-
-  // }
-
-  // const addToAntCount = () => {
-
-  // }
-  
-  
  
   const onSuccess = (res) => {
     console.log('[Login Success] currentUser:', res.profileObj);
@@ -97,7 +80,6 @@ function App () {
     setTimeout(refreshToken, refreshTiming)
   }
 
-  const message = user ? `${user.name}` : 'no one logged in'
   const loginButton = 
   <GoogleLogin
     clientId={config.GOOGLE_CLIENT_ID}
@@ -135,9 +117,7 @@ function App () {
       <li>
         <Link to="/Calendar">Schedule</Link>
       </li>
-      <li>
-        <Link to="/users">users</Link>
-      </li>
+
     </ul>
   </nav> : <p>Please log in to create an account and start climbing</p>
 
@@ -147,7 +127,6 @@ function App () {
         <header className="App-header">
           <h1>Climb-it Change</h1>
           <h3>An app for climbers who want to up their sends</h3>
-          <h4>{message}</h4>
           {user ? logoutButton : loginButton}
           {nav}
         </header>
@@ -167,9 +146,6 @@ function App () {
             </Route>
             <Route path='/new-user-form'>
               <NewUserForm url={BASE_URL} user={user} />
-            </Route>
-            <Route path='/users'>
-              <Users url={BASE_URL} />
             </Route>
             <Route path='/dashboard'>
               <Dashboard url={BASE_URL} user={user}/>

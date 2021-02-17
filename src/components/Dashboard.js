@@ -7,7 +7,8 @@ const Dashboard = (props) => {
     const [workoutCount, setWorkoutCount] = useState(props.user.workout_count)
     const [seshCount, setSeshCount] = useState(props.user.sesh_count)
     const [antCount, setAntCount] = useState(props.user.ant_count)
-    const tasks = [
+    
+    const [tasks, setTasks] = useState([
         {name:"Workout #1", id: 1, type: 'workout', category: "not_set", complete: false},
         {name:"Workout #2", id: 2, type: 'workout', category: "not_set", complete: false},
         {name:"Climbing Sesh #1", id: 3, type: 'sesh', category: "not_set", complete: false},
@@ -15,31 +16,55 @@ const Dashboard = (props) => {
         {name:"Antagonist #1", id: 5, type: 'ant', category: "not_set", complete: false},
         {name:"Antagonist #2", id: 6, type: 'ant', category: "not_set", complete: false},
         {name:"Free Climb!", id: 7, type: 'sesh', category: "not_set", complete: false}
-    ]
+    ])
+    const [schedule, setSchedule] = useState(props.user.schedule)
+    const updateTask = (id) => {
+        const task = tasks.find((task) => id === task.id)
+        const updatedTask = {name: task.name, id: task.id, type: task.type, category: task.category, complete: !task.complete}
+        const newTasks = [];
+        tasks.forEach((task1) => {
+            if (task1.id === id) {
+                newTasks.push(updatedTask);
+            } else {
+                newTasks.push(task1);
+            }
+        });
+        setTasks(newTasks)
+        console.log(tasks)
+        const data = {
+            email: props.user.email,
+            id: id
+        }
+        axios.patch(`${props.url}/mark_complete`, {data: data})
+        .then(res => {
+            console.log(res)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
+    
     const markComplete = (event, id) => {
         event.preventDefault();
         
         const task = tasks.find((task) => id === task.id)
         if (task.type === 'workout') {
-            console.log(props.user.workout_count)
             let count = workoutCount + 1
-            console.log(count)
             setWorkoutCount(count)
-            console.log(workoutCount)
-            task.complete = true
-            console.log(task.complete)
+            // task.complete = true
             const data = {email: props.user.email, count: count }
+            // useEffect(() => 
             axios.patch(`${props.url}/workout-count`, {data: data})
             .then(res => {
                 console.log(res)
             })
             .catch(error => {
                 console.log(error.message)
-            })
+            }) //, [workoutCount])
         } else if (task.type === 'sesh') {
             let count = seshCount + 1
             setSeshCount(count)
-            task.complete = true
+            // task.complete = true
             const data = {email: props.user.email, count: count }
             axios.patch(`${props.url}/sesh-count`, {data: data})
             .then(res => {
@@ -51,7 +76,7 @@ const Dashboard = (props) => {
         } else {
             let count = antCount + 1
             setAntCount(count)
-            task.complete = true
+            // task.complete = true
             const data = {email: props.user.email, count: count }
             axios.patch(`${props.url}/ant-count`, {data: data})
             .then(res => {
@@ -61,44 +86,9 @@ const Dashboard = (props) => {
                 console.log(error.message)
             })
         }
+        updateTask(task.id)
     }
-
-
-
-    // if (todo.length > 0) {
-    //     renderedTodos = todo.map((task) => {
-    //         return <Task 
-    //             name={task.name}
-    //             id={task.id}
-    //             key={task.id}
-    //             type={task.type}
-    //             category={task.category}
-    //             complete={task.complete}
-    //             markComplete={markComplete}
-    //         />
-    //     })
-    // }
     
-    // let mon = []
-    // let tues = []
-    // let 
-    // props.user.schedule.map((day) => {
-    //     return 
-    // })
-    // let renderedSun = []
-    // if (sun.length > 0) {
-    //     renderedSun = sun.map((task) => {
-    //         return <Task 
-    //             name={task.name}
-    //             id={task.id}
-    //             key={task.id}
-    //             type={task.type}
-    //             category={task.category}
-    //             complete={task.complete}
-    //             onClickTask={onClickTask}
-    //         />
-    //     })
-    // }
     let sun = props.user.schedule[0]
     if (sun.length > 0) {
         sun = sun.map((task) => {
@@ -110,6 +100,8 @@ const Dashboard = (props) => {
                 category={task.category}
                 complete={task.complete}
                 markComplete={markComplete}
+                updateTask={updateTask}
+                task={task}
             />
         })
     }
@@ -125,6 +117,7 @@ const Dashboard = (props) => {
                 category={task.category}
                 complete={task.complete}
                 markComplete={markComplete}
+                user={props.user}
             />
         })
     }
@@ -140,6 +133,7 @@ const Dashboard = (props) => {
                 category={task.category}
                 complete={task.complete}
                 markComplete={markComplete}
+                task={task}
             />
         })
     }
@@ -155,6 +149,7 @@ const Dashboard = (props) => {
                 category={task.category}
                 complete={task.complete}
                 markComplete={markComplete}
+                task={task}
             />
         })
     }
@@ -170,6 +165,7 @@ const Dashboard = (props) => {
                 category={task.category}
                 complete={task.complete}
                 markComplete={markComplete}
+                task={task}
             />
         })
     }
@@ -185,6 +181,7 @@ const Dashboard = (props) => {
                 category={task.category}
                 complete={task.complete}
                 markComplete={markComplete}
+                task={task}
             />
         })
     }
@@ -200,6 +197,7 @@ const Dashboard = (props) => {
                 category={task.category}
                 complete={task.complete}
                 markComplete={markComplete}
+                task={task}
             />
         })
     }
@@ -207,8 +205,9 @@ const Dashboard = (props) => {
     return (
         <div>
             <p>{props.user.name}'s Dashboard</p>
-            <p>{props.user.workout_count}</p>
-            <p>{workoutCount}</p>
+            <p>Workouts Completed: {props.user.workout_count}</p>
+            <p>Climbing Sessions Completed: {props.user.sesh_count}</p>
+            <p>Antagonist Workouts Completed: {props.user.ant_count}</p>
             <div className="column">
                 <h4>Sunday</h4>
                 {sun}
