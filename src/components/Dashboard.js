@@ -200,10 +200,11 @@ const Dashboard = (props) => {
             />
         })
     }
-
+   
     return (
         <div>
-            <p>{props.user.name}'s Dashboard</p>
+            <h3>{props.user.name}'s Dashboard</h3>
+            <p>Member Since {props.user.member_since}</p>
             <p>Workouts Completed: {props.user.workout_count}</p>
             <p>Climbing Sessions Completed: {props.user.sesh_count}</p>
             <p>Antagonist Workouts Completed: {props.user.ant_count}</p>
@@ -235,6 +236,7 @@ const Dashboard = (props) => {
                 <h4>Saturday</h4>
                 {sat}
             </div>
+            <footer>Note: When you refresh the page, you may notice the mark complete button reappears at the bottom of your completed task. Not to worry! Your data is still being saved, no need to press the button again. We at the Climb-it Change team are working hard fix this!</footer>
         </div>
     )
 }

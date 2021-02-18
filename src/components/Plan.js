@@ -49,7 +49,7 @@ const Plan = (props) => {
     
     return (
         <div>
-            <p>{props.user.name}</p>
+            <h3>Your Weekly Climbing Plan</h3>
             {planComponents}
         </div>
     )
