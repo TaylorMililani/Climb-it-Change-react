@@ -7,7 +7,7 @@ const PlanDetails = (props) => {
     return (
         <div>
             <div className="section">
-                <h3>Workout</h3>
+                <h3 className="type">Workout</h3>
                 <h4>3 Sets</h4>
                 <p>{props.pull}</p>
                 <p>{props.push}</p>
@@ -21,7 +21,7 @@ const PlanDetails = (props) => {
                 <p>{props.cool_down}</p>
             </div>
             <div className="section">
-                <h3>Antagonist Workout</h3>
+                <h3 className="type">Antagonist Workout</h3>
                 <h4>2 Sets</h4>
                 <p>{props.ant1}</p>
                 <p>{props.ant2}</p>

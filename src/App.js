@@ -33,7 +33,7 @@ function App () {
     console.log('[Login Success] currentUser:', res.profileObj);
     const data = {
       id_token: res.getAuthResponse().id_token,
-      name: res.profileObj.name,
+      name: res.profileObj.givenName,
       email: res.profileObj.email
     }
     axios.post(`${BASE_URL}/login`, { data: data })
@@ -125,9 +125,9 @@ function App () {
     <Router>
       <div className="App">
         <header className="App-header">
+          <div className="login-button">{user ? logoutButton : loginButton}</div>
           <h1>Climb-it Change</h1>
           <h3>An app for climbers who want to up their sends</h3>
-          {user ? logoutButton : loginButton}
           {nav}
         </header>
         <body>

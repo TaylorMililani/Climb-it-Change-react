@@ -1,0 +1,17 @@
+.header {
+    padding-top: 20px;
+    color: rgb(247, 170, 102);
+    /* outline-color: rgb(0, 0, 48);
+    outline-width: 5px; */
+    /* text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 6px 0 #000, -1px 0 0 #000; */
+}
+
+h4 {
+    margin: 100px;
+    padding: 10px;
+    
+}
+
+/* .homepage {
+    background-image: url('./climbing-header-volumes.jpg');
+} */
